@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            color: #fff;
+            background-color: black;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        #enemy {
+            color: red;
+        }
+
+        #name {
+            width: 90%;
+            margin: auto;
+            padding-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .name {
+            text-align: center;
+            width: 100%;
+            margin: 20px auto 0;
+            padding: 10px 0 10px;
+            border: 1px solid #fff;
+        }
+
+        #you {}
+
+        #character {
+            width: 90%;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            background-image: url(images/back3.jpg);
+            background-size: cover;
+            background-position: 50%;
+            border: 1px solid #fff;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .img {
+            text-align: center;
+            width: 40%;
+            margin: auto;
+        }
+
+        .clear {
+            height: 100%;
+        }
+
+        #status {
+            width: 90%;
+            margin: auto;
+            padding-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #status div {
+            text-align: center;
+            width: 40%;
+            margin: auto;
+            padding: 10px 0 10px;
+            border: 1px solid #fff;
+            display: flex;
+        }
+
+        #status div p {
+            margin: auto;
+        }
+
+        #command {
+            width: 90%;
+            margin: 20px auto 0px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            justify-content: center;
+        }
+
+        button {
+            color: #fff;
+            padding: 10px 0 10px;
+            border: 1px solid #fff;
+            background-color: black;
+        }
+
+        button:hover {
+            background-color: #777;
+        }
+
+        #botan0 {
+            font-size: 1.3rem;
+            height: 100px;
+            grid-row: 2/3;
+            grid-column: 1/3;
+        }
+
+        #botan1 {
+            font-size: 1.3rem;
+            height: 100px;
+            grid-row: 1/2;
+            grid-column: 1/5;
+        }
+
+        #botan2 {
+            font-size: 1.3rem;
+            height: 100px;
+            grid-row: 2/3;
+            grid-column: 3/5;
+        }
+
+        #botan9 {
+            visibility: hidden;
+        }
+
+        #window {
+            width: 90%;
+            margin-top: -355px;
+            margin-left: 5%;
+            padding: 70px 0 70px;
+            border: 1px solid #fff;
+            position: absolute;
+            background-color: black;
+            z-index: 1;
+        }
+
+        #bunsyou {
+            width: 90%;
+            margin-left: 5%;
+            padding: 5px 0 5px;
+            border: 1px solid #fff;
+            background-color: black;
+        }
+
+        #bunsyou p {
+            text-align: center;
+
+        }
+
+        #moji {
+            text-align: center;
+        }
+
+        .sankaku {
+            text-align: center;
+        }
+
+        .bgm {
+            height: 0;
+        }
+
+        footer {
+            z-index: -1;
+            color: #535353;
+            position: fixed;
+            bottom: 0;
+            margin-left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        /* レスポンシブ */
+        @media (min-width: 800px) {
+            main {
+                margin: 0 auto 0;
+                max-width: 800px;
+            }
+
+            #window {
+                position: relative;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div id="container" class="wrapper">
+            <div id="name">
+                <div class="name">はじまりのち</div>
+            </div>
+            <div id="character">
+                <div><img class="clear" src="images/clear.png" alt=""></div>
+                <div class="img"><img class="you-img" src="images/_1.png" alt=""></div>
+                <div><img class="clear" src="images/clear.png" alt=""></div>
+            </div>
+            <section id="command">
+                <button id="botan0" class="effect">遊技場</button>
+                <button id="botan1" class="effect">近くの村に行ってみる。</button>
+                <button id="botan2" class="effect">闘技場</button>
+                <button id="botan9"></button>
+            </section>
+            <div id="bunsyou">
+                <p id="text">さあ、冒険の<br>始まりだ！</p>
+                <p class="sankaku">▼</p>
+            </div>
+            <div id="window">
+                <h2 id="moji">おや気づいたかい。<br>アンタそこで倒れてたぞ？<br>昼寝でもしてたのか。</h2>
+                <p class="sankaku">▼</p>
+            </div>
+        </div>
+    </main>
+    <div>
+        <!-- ミュージック -->
+        <video loop class="bgm" id="amaterasu-se" src="bgm/amaterasu.m4a"></video>
+        <video loop class="bgm" id="boss1-se" src="bgm/boss1.m4a"></video>
+        <video loop class="bgm" id="boss2-se" src="bgm/boss2.m4a"></video>
+        <video loop class="bgm" id="boss3-se" src="bgm/boss3.mp3"></video>
+        <video loop class="bgm" id="shinpi-se" src="bgm/shinpi.mp3"></video>
+        <video loop class="bgm" id="dungeon1-se" src="bgm/dungeon1.mp3"></video>
+        <video loop class="bgm" id="shiva-se" src="bgm/shiva.m4a"></video>
+        <video loop class="bgm" id="mura1-se" src="bgm/mura1.mp3"></video>
+        <video loop class="bgm" id="mura2-se" src="bgm/mura2.m4a"></video>
+        <video autoplay loop class="bgm" id="mura3-se" src="bgm/mura3.mp3"></video>
+        <video loop class="bgm" id="mura4-se" src="bgm/mura4.mp3"></video>
+        <!-- サウンドエフェクト -->
+        <video class="bgm" id="sound-se" src="music/cursor.mp3"></video>
+        <video class="bgm" id="attack-se" src="music/attack.mp3"></video>
+        <video class="bgm" id="miss-se" src="music/miss.mp3"></video>
+        <video class="bgm" id="life-se" src="music/life.mp3"></video>
+        <video class="bgm" id="winner-se" src="music/winner.mp3"></video>
+        <video class="bgm" id="gameover-se" src="music/gameover.mp3"></video>
+        <video class="bgm" id="slash-se" src="music/slash.mp3"></video>
+        <video class="bgm" id="magic1-se" src="music/magic1.mp3"></video>
+        <video class="bgm" id="magic2-se" src="music/magic2.mp3"></video>
+        <video class="bgm" id="magic3-se" src="music/magic3.mp3"></video>
+        <video class="bgm" id="magic4-se" src="music/magic4.mp3"></video>
+        <video class="bgm" id="magic5-se" src="music/magic5.mp3"></video>
+        <video class="bgm" id="item-se" src="music/item.mp3"></video>
+    </div>
+    <footer>
+        <small>&copy;2024 W.R</small>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        'use strict';
+
+        let message = "さあ、聞きこみをしよう！";
+        let ppp = `<p>${message}</p>`;
+        let key = 0;
+
+        // ========================================================BGMプレイヤー
+        $('body').on('mousemove', function () {
+            $('#mura3-se').get(0).play();
+        });
+
+        $(function () {
+            // ===========================================ゲーム開始
+            $('#botan0').on('click', function () {
+                $('#botan9').trigger('click');
+            });
+            $('#botan1').on('click', function () {
+                $('#botan9').trigger('click');
+            });
+            $('#botan2').on('click', function () {
+                $('#botan9').trigger('click');
+            });
+
+            // ===========================================風景
+            $('#botan0').hover(
+                function () {
+                    message = '<img class="you-img" src="images/_101.png" alt="">';
+                    $('.img').html(message);
+                    $('#character').css("background-image", "url(images/back19.jpg)");
+                    message = 'ドラ〇エ3でロマリアの地下にある<br>アレをイメージして作りました。';
+                    $('#text').html(message);
+                }
+            );
+            $('#botan1').hover(
+                function () {
+                    message = '<img class="you-img" src="images/_1.png" alt="">';
+                    $('.img').html(message);
+                    $('#character').css("background-image", "url(images/back3.jpg)");
+                    message = '冒険に向かいます。<br>何度か話しかけることでフラグ管理をしています。';
+                    $('#text').html(message);
+                }
+            );
+            $('#botan2').hover(
+                function () {
+                    message = '<img class="you-img" src="images/_31.png" alt="">';
+                    $('.img').html(message);
+                    $('#character').css("background-image", "url(images/back9.jpg)");
+                    message = '制作の過程で用意したデバッグルームです。<br>こちらで各モンスターのページまで飛べます。';
+                    $('#text').html(message);
+                }
+            );
+
+            // ===========================================イベント会話
+            $('#botan0').click(
+                function () {
+                    message = '<p id="you">こちらは遊技場でございます。<br>どれが生き残るか賭ける場所。<br>では、こちらへどうぞ。</p>'
+                    $('#moji').html(message);
+                    // =====================リンク移動
+                    setTimeout(function () {
+                        window.location.href = 'dungeon_casino.html';
+                    }, 3000);
+                    // =====================動かせなくする
+                    $('#window').click(
+                        function () {
+                            $('#window').css('visibility', 'visible');
+                        }
+                    );
+                }
+            );
+            $('#botan1').click(
+                function () {
+                    message = '<p id="you">とりあえずあなたは<br>近くの村へ行ってみる事にした。<br>冒険の始まりだ。</p>'
+                    $('#moji').html(message);
+                    // =====================リンク移動
+                    setTimeout(function () {
+                        window.location.href = 'dungeon_village.html';
+                    }, 3000);
+                    // =====================動かせなくする
+                    $('#window').click(
+                        function () {
+                            $('#window').css('visibility', 'visible');
+                        }
+                    );
+                }
+            );
+            $('#botan2').click(
+                function () {
+                    message = '<p id="you">ここは闘技場。<br>いきなりボスと戦えるぞ。<br>レベルは相手に合わせてやる。</p>'
+                    $('#moji').html(message);
+                    // =====================リンク移動
+                    setTimeout(function () {
+                        window.location.href = 'dungeon_arena.html';
+                    }, 3000);
+                    // =====================動かせなくする
+                    $('#window').click(
+                        function () {
+                            $('#window').css('visibility', 'visible');
+                        }
+                    );
+                }
+            );
+
+            // ===========================================ターン開始
+            $('#botan9').on('click', function () {
+                $('#window').css('visibility', 'visible');
+            })
+
+            // ===========================================　UI
+            $('.effect').hover(
+                function () {
+                    $('#sound-se').get(0).play();
+                }
+            );
+
+            $('#window').click(
+                function () {
+                    $('#window').css('visibility', 'hidden');
+                }
+            );
+
+            $(function () {
+                setInterval(function () {
+                    $('.sankaku').fadeOut(500, function () { $(this).fadeIn(500) });
+                });
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>
